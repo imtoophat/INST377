@@ -200,13 +200,117 @@ var organizations = [
 
 <body>
 <!-- Feel free to add empty tags. Data shouldn't be here. -->
-	<div id="org_table"></div>
+	
+    <select id="questions">
+        
+        <option value="1">How many non-profit organizations are listed?</option>
+        <option value="2">How many organizations are less than 10 years old?</option>
+        <option value="3">How many organizations are North American?</option>
+        <option value="4">How many organizations used the Transportation type of data?</option>
+        <option value="5">What organizations are based in the USA?</option>
+
+    </select>
+
+    <button id="query" onclick="performTask()">Let's find out!</button>
+
+    <div id="org_table">
+        
+
+
+
+    </div>
 
 <script>
 // outputs the first item of the organizations array. Just for testing.
 console.log(organizations[0]); 
 
 // Your JavaScript code goes here
+
+function performTask(){
+
+    var opt = document.getElementById("questions");
+    var selected = opt.options[opt.selectedIndex];
+    var target = "";
+    var count = 0;
+
+    if(selected.value === "1"){
+
+        target = "Nonprofit";
+
+        for(var i = 0; i<organizations.length;i++){
+
+            if(organizations[i]["Organization Type"] == target){
+
+                count++;
+            }
+        }
+
+        alert(count);
+
+    }
+
+    else if(selected.value === "2"){
+
+        check = "Founding Year";
+        target = 2018;
+
+        organizations.forEach(function(dict){
+
+            if(target - dict[check] < 10){
+
+                count++;
+            }
+            
+        });
+    }
+
+    else if(selected.value === "3"){
+
+        check = "Region";
+        target = "North American";
+
+        organizations.forEach(function(dict){
+
+            if(dict[check] === target){
+
+                count++;
+            }
+            
+        });
+
+
+    }
+
+    else if(selected.value === "4"){
+
+        check = "Type of Data Used";
+        target = "Transportation";
+
+        organizations.forEach(function(dict){
+
+            if(dict[check] === target){
+
+                count++;
+            }
+            
+        });
+    }
+
+    else if(selected.value === "5"){
+
+
+    }
+
+    
+
+
+
+}
+
+function output(x){
+
+
+}
 
 
 </script>
