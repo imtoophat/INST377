@@ -141,10 +141,55 @@ class Organization implements JsonSerializable {
   // TODO #1: Implement a function to save an new organization
   // return number of rows inserted
 
+  public function saveOrganization(mysqli $conn){
+
+    $stmt = $conn->prepare("INSERT INTO organizations
+                          (organization_name, organization_type, region,
+                           country, country_income_level, sectors,
+                           description, city, state_or_region,
+                           founding_year, size,type_of_data_used)
+                          VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
+    $stmt->bind_param("ssssssssss",
+                      $this->organization_name,
+                      $this->organization_type,
+                      $this->region,
+                      $this->country,
+                      $this->country_income_level,
+                      $this->sectors,
+                      $this->description,
+                      $this->city,
+                      $this->state_or_region,
+                      $this->founding_year,
+                      $this->size,
+                      $this->type_of_data_used);
+    $stmt->execute();
+    return $stmt->affected_rows;
+  }
+
   // TODO #2: Implement a function to delete an organization.
   // return number of rows deleted
 
+  public function delete(mysqli $conn){
+
+    $stmt = $conn->prepare("DELETE FROM organizations where profile_id = ?");
+    $stmt->bind_param("i, $this->profile_id";
+    $stmt->execute();
+    return $stmt->affected_rows;
+  }
+
   // TODO #3: Implement a function to save changes to an existing organization
   // return number of rows updated
+
+  public function update(mysqli $conn){
+
+    if ($this->profile_id == 0){
+      $num_affected = $this->insert($conn);
+    }
+
+    else{
+
+      $num_affected = $this->update($conn);
+    }
+  }
 }
  ?>
