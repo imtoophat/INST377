@@ -5,6 +5,20 @@
 	div {
 		margin-bottom: 20px;
 	}
+    table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
 </style>
 
 <!-- Data -->
@@ -263,7 +277,9 @@ function performTask(){
 
         var div = document.getElementById('org_table');
 
-        var toAdd = '<h1> There are ' + count + ' organizations younger than 10 years.</h1>';
+        var toAdd = '<table><tr><th>Answer</th></tr><tr><td>There are ' + count + ' organizations younger than 10 years.</td></tr></table>';
+
+        //var toAdd = '<h1> There are ' + count + ' organizations younger than 10 years.</h1>';
 
         div.innerHTML = toAdd;
     }
@@ -328,12 +344,14 @@ function performTask(){
 
         var div = document.getElementById('org_table');
 
-        var toAdd = '<h1>Summary of Organization Sizes</h1>';
+        var toAdd = '<table><tr><th>Answer</th></tr>';
 
         for(const [key,value] of sizes.entries()){
 
-            toAdd = toAdd + '<h2>' + key + ': ' + value;
+            toAdd = toAdd + '<tr><td>' + key +'</td>' + '<td>' + value + '</td></tr>';
         }
+
+        toAdd = toAdd + '</table>'
 
         
         div.innerHTML = toAdd;
@@ -353,7 +371,7 @@ function output(x,target){
 
     var div = document.getElementById('org_table');
 
-    var toAdd = '<h1> There are ' + x +' ' + target + ' organizations.</h1>';
+    var toAdd = '<table><tr><th>Answer</th></tr><tr><td>There are ' + x +' ' + target + ' organizations.</td></tr></table>';
 
     div.innerHTML = toAdd;
 
